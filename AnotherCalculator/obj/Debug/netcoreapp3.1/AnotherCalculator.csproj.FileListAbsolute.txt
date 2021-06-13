@@ -1,0 +1,13 @@
+D:\repos\AnotherCalculator\AnotherCalculator\bin\Debug\netcoreapp3.1\AnotherCalculator.exe
+D:\repos\AnotherCalculator\AnotherCalculator\bin\Debug\netcoreapp3.1\AnotherCalculator.deps.json
+D:\repos\AnotherCalculator\AnotherCalculator\bin\Debug\netcoreapp3.1\AnotherCalculator.runtimeconfig.json
+D:\repos\AnotherCalculator\AnotherCalculator\bin\Debug\netcoreapp3.1\AnotherCalculator.runtimeconfig.dev.json
+D:\repos\AnotherCalculator\AnotherCalculator\bin\Debug\netcoreapp3.1\AnotherCalculator.dll
+D:\repos\AnotherCalculator\AnotherCalculator\bin\Debug\netcoreapp3.1\AnotherCalculator.pdb
+D:\repos\AnotherCalculator\AnotherCalculator\obj\Debug\netcoreapp3.1\AnotherCalculator.csprojAssemblyReference.cache
+D:\repos\AnotherCalculator\AnotherCalculator\obj\Debug\netcoreapp3.1\AnotherCalculator.AssemblyInfoInputs.cache
+D:\repos\AnotherCalculator\AnotherCalculator\obj\Debug\netcoreapp3.1\AnotherCalculator.AssemblyInfo.cs
+D:\repos\AnotherCalculator\AnotherCalculator\obj\Debug\netcoreapp3.1\AnotherCalculator.csproj.CoreCompileInputs.cache
+D:\repos\AnotherCalculator\AnotherCalculator\obj\Debug\netcoreapp3.1\AnotherCalculator.dll
+D:\repos\AnotherCalculator\AnotherCalculator\obj\Debug\netcoreapp3.1\AnotherCalculator.pdb
+D:\repos\AnotherCalculator\AnotherCalculator\obj\Debug\netcoreapp3.1\AnotherCalculator.genruntimeconfig.cache
