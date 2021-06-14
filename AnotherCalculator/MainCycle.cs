@@ -35,6 +35,16 @@ namespace AnotherCalculator
         {
             NestedStringElement nestedTree = new NestedStringElement();
             // строение узла: строка, уровень вложенности, лист экземпляров этого же типа
+            
+
+            nestedTree = TreeProcessing(rawInput);
+            
+            return new List<NestedStringElement>();
+        }
+
+        private NestedStringElement TreeProcessing(string rawInput)
+        {
+            NestedStringElement nestedTree = new NestedStringElement();
             int nodeCount = rawInput.Count(f => f == '(');
             if (nodeCount == 0)
             {
@@ -43,14 +53,68 @@ namespace AnotherCalculator
                 return nestedTree;
             }
 
-            for (int i = 0; i <= nodeCount; i++)
+            var bufferInput = rawInput;
+            int nestedLevel = 0;
+            while (bufferInput.Length > 0)
             {
-                
+                // удаляем вложенные выражения со скобками
+
+                if (ContainsParenthesis(bufferInput))
+                {
+                    var currentInput = RemoveParenthesis(bufferInput);
+                    NestedStringElement childInput = GetAllParenthesis(bufferInput);
+                    nestedTree.NestedString = currentInput;
+                    nestedTree.NestedLevel = nestedLevel;
+                }
+                else
+                {
+
+                }
+
             }
 
-            return new List<NestedStringElement>();
+            return nestedTree;
         }
 
+        private string RemoveParenthesis(string bufferInput)
+        {
+            int? openCoord = 0;
+            int? closeCoord = 0;
+            int iterationCoord = 0;
+            int? parenthesisCount = 0;
+            var processinput = bufferInput;
+            while (IsContainsParenthesis(processinput))
+            {
+                iterationCoord = FindParenthesis(processinput, '(', iterationCoord);
+                openCoord = iterationCoord;
+                while (IsContainsParenthesis(processinput))
+                {
+                    
+                }
+            }
+
+        }
+
+        private bool IsContainsParenthesis(string stringe)
+        {
+            if (stringe.Contains("(") || stringe.Contains(")"))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private int FindParenthesis(string stringe, char parenthesis, int iterationCoord)
+        {
+            stringe = stringe.Remove(0, iterationCoord - 1);
+            return stringe.IndexOf(parenthesis);
+        }
+        private int FindParenthesis(string stringe, int iterationCoord)
+        {
+            stringe = stringe.Remove(0, iterationCoord - 1);
+            return stringe.IndexOf(parenthesis);
+        }
 
         private void CheckFormatOfInput(string rawInput)
         {

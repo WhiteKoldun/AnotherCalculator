@@ -21,5 +21,10 @@ namespace AnotherCalculator.SequenceTypes
             childElement.NestedLevel = this.NestedLevel + 1;
             this.Children.Add(childElement);
         }
+
+        public int? GetMaxNestedLevel()
+        {
+            return null;
+        }
     }
 }
