@@ -30,5 +30,6 @@ namespace AnotherCalculator.SequenceTypes
             }
 
         }
+        
     }
 }

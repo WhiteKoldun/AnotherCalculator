@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using AnotherCalculator.SequenceTypes;
@@ -42,7 +43,22 @@ namespace AnotherCalculator
             return nestedTree;
         }
 
-        private string RemoveParenthesis(string bufferInput)
+        public List<NestedStringElement> ChildrenCreator(NestedStringElement nestedBufferElement)
+        {
+            List<NestedStringElement> childrenList = new List<NestedStringElement>();
+            string nestedString = nestedBufferElement.NestedString;
+            while (IsContainsParenthesis(nestedString))
+            {
+                NestedStringElement childElement = new NestedStringElement();
+                childElement.NestedString = GetExpression(nestedString);
+                nestedString = RemoveExpression(nestedString);
+                childrenList.Add(childElement);
+            }
+
+            return childrenList;
+        }
+
+        private string RemoveExpression(string nestedString)
         {
             int? openCoord = 0;
             int? closeCoord = 0;
@@ -58,7 +74,11 @@ namespace AnotherCalculator
 
                 }
             }
+        }
 
+        private string GetExpression(string nestedString)
+        {
+            throw new NotImplementedException();
         }
 
         private bool IsContainsParenthesis(string stringe)
