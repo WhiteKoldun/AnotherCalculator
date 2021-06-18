@@ -9,6 +9,7 @@ namespace AnotherCalculator
 {
     class MainCycle
     {
+        TreeProcessing _tree = new TreeProcessing();
         bool isProgramWorkin;
         string forbiddenChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ,./?;:'\"\\|~`_=!@#$%%^&*";
         private string errorString;
@@ -37,85 +38,12 @@ namespace AnotherCalculator
             // строение узла: строка, уровень вложенности, лист экземпляров этого же типа
             
 
-            nestedTree = TreeProcessing(rawInput);
+            nestedTree = _tree.GenerateTree(rawInput);
             
             return new List<NestedStringElement>();
         }
 
-        private NestedStringElement TreeProcessing(string rawInput)
-        {
-            NestedStringElement nestedTree = new NestedStringElement();
-            int nodeCount = rawInput.Count(f => f == '(');
-            if (nodeCount == 0)
-            {
-                nestedTree.NestedString = rawInput;
-                nestedTree.NestedLevel = 0;
-                return nestedTree;
-            }
-
-            var bufferInput = rawInput;
-            int nestedLevel = 0;
-            while (bufferInput.Length > 0)
-            {
-                // удаляем вложенные выражения со скобками
-
-                if (ContainsParenthesis(bufferInput))
-                {
-                    var currentInput = RemoveParenthesis(bufferInput);
-                    NestedStringElement childInput = GetAllParenthesis(bufferInput);
-                    nestedTree.NestedString = currentInput;
-                    nestedTree.NestedLevel = nestedLevel;
-                }
-                else
-                {
-
-                }
-
-            }
-
-            return nestedTree;
-        }
-
-        private string RemoveParenthesis(string bufferInput)
-        {
-            int? openCoord = 0;
-            int? closeCoord = 0;
-            int iterationCoord = 0;
-            int? parenthesisCount = 0;
-            var processinput = bufferInput;
-            while (IsContainsParenthesis(processinput))
-            {
-                iterationCoord = FindParenthesis(processinput, '(', iterationCoord);
-                openCoord = iterationCoord;
-                while (IsContainsParenthesis(processinput))
-                {
-                    
-                }
-            }
-
-        }
-
-        private bool IsContainsParenthesis(string stringe)
-        {
-            if (stringe.Contains("(") || stringe.Contains(")"))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private int FindParenthesis(string stringe, char parenthesis, int iterationCoord)
-        {
-            stringe = stringe.Remove(0, iterationCoord - 1);
-            return stringe.IndexOf(parenthesis);
-        }
-        private int FindParenthesis(string stringe, int iterationCoord)
-        {
-            stringe = stringe.Remove(0, iterationCoord - 1);
-            return stringe.IndexOf(parenthesis);
-        }
-
+        
         private void CheckFormatOfInput(string rawInput)
         {
             rawInput = rawInput.ToUpper();

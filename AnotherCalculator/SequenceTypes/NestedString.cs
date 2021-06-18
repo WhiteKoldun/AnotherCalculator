@@ -4,10 +4,10 @@ using System.Text;
 
 namespace AnotherCalculator.SequenceTypes
 {
-    class NestedStringElement
+    public class NestedStringElement
     {
         public string NestedString { get; set; }
-        public int NestedLevel { get; set; }
+        public int NestedLevel { get; set; } = 0;
         public List<NestedStringElement> Children { get; set; }
 
         public void AddChild(NestedStringElement childElement)
@@ -24,7 +24,11 @@ namespace AnotherCalculator.SequenceTypes
 
         public int? GetMaxNestedLevel()
         {
-            return null;
+            if (this.Children == null)
+            {
+                return 0;
+            }
+
         }
     }
 }
