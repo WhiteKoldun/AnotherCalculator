@@ -19,26 +19,9 @@ namespace AnotherCalculator
                 nestedTree.NestedLevel = 0;
                 return nestedTree;
             }
-
             var bufferString = rawInput;
             int nestedLevel = 0;
-            while (bufferString.Length > 0)
-            {
-                // удаляем вложенные выражения со скобками
-
-                if (ContainsParenthesis(bufferString))
-                {
-                    var currentInput = RemoveParenthesis(bufferString);
-                    NestedStringElement childInput = GetAllParenthesis(bufferString);
-                    nestedTree.NestedString = currentInput;
-                    nestedTree.NestedLevel = nestedLevel;
-                }
-                else
-                {
-
-                }
-
-            }
+            
 
             return nestedTree;
         }
@@ -64,7 +47,7 @@ namespace AnotherCalculator
             int? closeCoord = 0;
             int iterationCoord = 0;
             int? parenthesisCount = 0;
-            var processinput = bufferInput;
+            var processinput = nestedString;
             while (IsContainsParenthesis(processinput))
             {
                 iterationCoord = FindParenthesis(processinput, '(', iterationCoord);
@@ -74,6 +57,8 @@ namespace AnotherCalculator
 
                 }
             }
+
+            return nestedString;
         }
 
         private string GetExpression(string nestedString)
@@ -99,7 +84,7 @@ namespace AnotherCalculator
         private int FindParenthesis(string stringe, int iterationCoord)
         {
             stringe = stringe.Remove(0, iterationCoord - 1);
-            return stringe.IndexOf(parenthesis);
+            return stringe.IndexOf(stringe);
         }
 
     }
