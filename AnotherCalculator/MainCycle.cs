@@ -26,7 +26,7 @@ namespace AnotherCalculator
                 int result = new int();
                 CheckFormatOfInput(rawInput);
                 rawInput = NormaliseRawInput(rawInput);
-                var nestedStringsTree = GenerateNestedTree(rawInput);
+                var nestedStringsTree = _tree.GenerateTree(rawInput);
                 Console.WriteLine("Результат = " + result + " \ndebug: " +rawInput);
                 ShowErrorText();
             }

@@ -10,17 +10,24 @@ namespace AnotherCalculator.SequenceTypes
         public string NestedString { get; set; }
         public int NestedLevel { get; set; } = 0;
         public List<NestedStringElement> Children { get; set; }
+        public Guid? ThisId { get; set; }
+        public Guid? MotherId { get; set; }
 
-        public void AddChild(NestedStringElement childElement)
+        public void AddChild(List<NestedStringElement> childElements)
         {
             if (this.Children is null)
             {
-                this.Children = new List<NestedStringElement>();
-                childElement.NestedLevel = this.NestedLevel + 1;
-                this.Children.Add(childElement);
+                Children = new List<NestedStringElement>();
             }
-            childElement.NestedLevel = this.NestedLevel + 1;
-            this.Children.Add(childElement);
+
+            foreach (var childElement in childElements)
+            {
+                childElement.NestedLevel = NestedLevel + 1;
+                childElement.ThisId = Guid.NewGuid();
+                childElement.MotherId = ThisId;
+                Children.Add(childElement);
+            }
+            
         }
 
         public int? GetMaxNestedLevel()
