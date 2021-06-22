@@ -29,12 +29,13 @@ namespace AnotherCalculator
             int nestedLevel = 0;
             if (nodeCount == 1)
             {
-               nestedTree.AddChild(ChildrenCreator(nestedTree).Children);
+               nestedTree = ChildrenCreator(nestedTree);
             }
 
             if (nodeCount > 1)
             {
                 nestedTree.AddChild(ChildrenCreator(nestedTree).Children);
+                bufferList = nestedTree.Children;
                 bool containParenthesis;
                 do
                 {
@@ -84,6 +85,7 @@ namespace AnotherCalculator
 
             bufferElement.NestedString = nestedString;
             bufferElement.Children = childrenList;
+            bufferElement.ThisId = nestedBufferElement.ThisId;
             return bufferElement;
         }
 
@@ -97,7 +99,7 @@ namespace AnotherCalculator
             // находим первую скобку
             if (IsContainsParenthesis(nestedString) && IsOpenedParenthesis(nestedString))
             {
-                parenthesisCount = 1;
+                parenthesisCount = 0;
             }
             else
             {
@@ -109,7 +111,6 @@ namespace AnotherCalculator
             // цикл обрезки одной скобки (и всего, что в нее вложено)
             do
             {
-                processInput.Remove(iterationCoord, 1);
                 if (IsOpenedParenthesis(processInput))
                 {
                     parenthesisCount = parenthesisCount + 1;
@@ -121,9 +122,10 @@ namespace AnotherCalculator
 
                 if (parenthesisCount == 0)
                 {
-                    closeCoord = iterationCoord;
+                    closeCoord = iterationCoord + 1;
                 }
-
+                processInput = processInput.Remove(iterationCoord, 1);
+                processInput = processInput.Insert(iterationCoord, " ");
                 iterationCoord = FindParenthesis(processInput);
             } while (parenthesisCount > 0);
 
@@ -140,7 +142,7 @@ namespace AnotherCalculator
                 // находим первую скобку
                 if (IsContainsParenthesis(nestedString) && IsOpenedParenthesis(nestedString))
                 {
-                    parenthesisCount = 1;
+                    parenthesisCount = 0;
                 }
                 else
                 {
@@ -153,7 +155,6 @@ namespace AnotherCalculator
                 // цикл обрезки одной скобки (и всего, что в нее вложено)
                 do
                 {
-                    processInput.Remove(iterationCoord, 1);
                     if (IsOpenedParenthesis(processInput))
                     {
                         parenthesisCount = parenthesisCount + 1;
@@ -165,10 +166,12 @@ namespace AnotherCalculator
 
                     if (parenthesisCount == 0)
                     {
-                        closeCoord = iterationCoord;
+                        closeCoord = iterationCoord+1;
                     }
+                    processInput = processInput.Remove(iterationCoord, 1);
+                    processInput = processInput.Insert(iterationCoord, " ");
 
-                    iterationCoord = FindParenthesis(processInput);
+                iterationCoord = FindParenthesis(processInput);
                 } while (parenthesisCount > 0);
 
                 nestedString = nestedString.Remove(closeCoord, nestedString.Length - closeCoord);
@@ -192,6 +195,11 @@ namespace AnotherCalculator
             char closenParenth = ')';
             int positionOpenParenthesis = input.IndexOf(openParenth);
             int positionCloseParenthesis = input.IndexOf(closenParenth);
+            if (positionOpenParenthesis == -1)
+            {
+                return positionCloseParenthesis;
+            }
+
             if (positionOpenParenthesis > positionCloseParenthesis)
             {
                 return positionCloseParenthesis;
@@ -203,9 +211,12 @@ namespace AnotherCalculator
         private bool IsOpenedParenthesis(string input)
         {
             int position = FindParenthesis(input);
-            if (input.Substring(position, 1) == "(")
+            if (position >= 0)
             {
-                return true;
+                if (input.Substring(position, 1) == "(")
+                {
+                    return true;
+                }
             }
 
             return false;

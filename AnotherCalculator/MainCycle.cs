@@ -18,7 +18,9 @@ namespace AnotherCalculator
             for (isProgramWorkin = true; isProgramWorkin;)
             {
                 Console.WriteLine("Введите новое выражение, введите \"q\" для завершения:");
-                var rawInput = Console.ReadLine();
+                //var rawInput = Console.ReadLine();
+                var rawInput = "1+2((12+13)123+143+(22+34))+(1+2(3+4))";
+                Console.WriteLine(rawInput);
                 if (rawInput.ToUpper() == "Q")
                 {
                     isProgramWorkin = false;
