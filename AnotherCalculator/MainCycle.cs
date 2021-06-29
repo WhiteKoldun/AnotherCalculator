@@ -20,21 +20,25 @@ namespace AnotherCalculator
                 //var rawInput = Console.ReadLine();
                 var rawInput = "1+2((12+13)123+143+(22+34))+(1+2(3+4))";
                 Console.WriteLine(rawInput);
-                if (rawInput.ToUpper() == "Q")
-                {
-                    isProgramWorkin = false;
-                }
+                CatchQuitSymbol(rawInput);
                 int result = new int();
                 CheckFormatOfInput(rawInput);
                 rawInput = NormaliseRawInput(rawInput);
+                var stringNoParenthesis = _tree.TransformString(rawInput);
                 Console.WriteLine("Результат = " + result + " \ndebug: " +rawInput);
                 ShowErrorText();
             }
         }
 
- 
+        private void CatchQuitSymbol(string rawInput)
+        {
+            if (rawInput.ToUpper() == "Q")
+            {
+                isProgramWorkin = false;
+            }
+        }
 
-        
+
         private void CheckFormatOfInput(string rawInput)
         {
             rawInput = rawInput.ToUpper();

@@ -2,14 +2,25 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using AnotherCalculator.Dto;
 using Microsoft.VisualBasic;
 
 namespace AnotherCalculator
 {
     public class TreeProcessing
     {
+        public string TransformString(string input)
+        {
+            string result = input;
+            while (IsContainsParenthesis(result))
+            {
+                var replacement = GetExpression(result);
+            }
 
+            return result;
+        }
 
         private string RemoveExpression(string nestedString)
             // вызывается только после проверки на наличие скобок
@@ -55,7 +66,7 @@ namespace AnotherCalculator
             return nestedString;
         }
 
-        private string GetExpression(string nestedString)
+        private CuttedExpression GetExpression(string nestedString)
         {
                 int openCoord = 0;
                 int closeCoord = 0;
@@ -98,7 +109,11 @@ namespace AnotherCalculator
 
                 nestedString = nestedString.Remove(closeCoord, nestedString.Length - closeCoord);
                 nestedString = nestedString.Remove(0, openCoord);
-                return nestedString;
+                var returnExpression = new CuttedExpression();
+                returnExpression.Expression = nestedString;
+                returnExpression.StartPosition = openCoord;
+                returnExpression.EndPosition = closeCoord;
+                return returnExpression;
         }
 
         private bool IsContainsParenthesis(string stringe)
