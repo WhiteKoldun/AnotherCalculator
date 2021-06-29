@@ -3,91 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using AnotherCalculator.SequenceTypes;
 using Microsoft.VisualBasic;
 
 namespace AnotherCalculator
 {
     public class TreeProcessing
     {
-        public NestedStringElement GenerateTree(string rawInput)
-        {
-            NestedStringElement nestedTree = new NestedStringElement();
-            int nodeCount = rawInput.Count(f => f == '(');
-            nestedTree.NestedString = rawInput;
-            nestedTree.NestedLevel = 0;
-            nestedTree.MotherId = null;
-            nestedTree.ThisId = Guid.NewGuid();
-            if (nodeCount == 0)
-            {
-                return nestedTree;
-            }
-            var bufferElement = nestedTree;
-            List<NestedStringElement> bufferList = new List<NestedStringElement>();
-            List<NestedStringElement> iterationList = new List<NestedStringElement>();
-            var bufferString = rawInput;
-            int nestedLevel = 0;
-            if (nodeCount == 1)
-            {
-               nestedTree = ChildrenCreator(nestedTree);
-            }
 
-            if (nodeCount > 1)
-            {
-                nestedTree.AddChild(ChildrenCreator(nestedTree).Children);
-                bufferList = nestedTree.Children;
-                bool containParenthesis;
-                do
-                {
-                    containParenthesis = false;
-                    foreach (var element in bufferList)
-                    {
-                        iterationList.AddRange(ChildrenCreator(element).Children);
-                    }
-
-                    bufferList = iterationList;
-
-                    foreach (var element in bufferList)
-                    {
-                        if (IsContainsParenthesis(element.NestedString))
-                        {
-                            containParenthesis = true;
-                        }
-                    }
-                } while (containParenthesis);
-
-            }
-
-            return nestedTree;
-        }
-
-        public NestedStringElement ChildrenCreator(NestedStringElement nestedBufferElement)
-        {
-            List<NestedStringElement> childrenList = new List<NestedStringElement>();
-            NestedStringElement bufferElement = new NestedStringElement();
-            string nestedString = nestedBufferElement.NestedString;
-            int nestedLevel = nestedBufferElement.NestedLevel + 1;
-            if (IsContainsParenthesis(nestedString) == false)
-            {
-                return null;
-            }
-
-            while (IsContainsParenthesis(nestedString))
-            {
-                NestedStringElement childElement = new NestedStringElement();
-                childElement.NestedString = GetExpression(nestedString);
-                childElement.NestedLevel = nestedLevel;
-                childElement.MotherId = nestedBufferElement.ThisId;
-                childElement.ThisId = Guid.NewGuid();
-                nestedString = RemoveExpression(nestedString);
-                childrenList.Add(childElement);
-            }
-
-            bufferElement.NestedString = nestedString;
-            bufferElement.Children = childrenList;
-            bufferElement.ThisId = nestedBufferElement.ThisId;
-            return bufferElement;
-        }
 
         private string RemoveExpression(string nestedString)
             // вызывается только после проверки на наличие скобок

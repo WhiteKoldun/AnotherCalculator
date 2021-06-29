@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using AnotherCalculator.SequenceTypes;
 
 namespace AnotherCalculator
 {
@@ -28,22 +27,12 @@ namespace AnotherCalculator
                 int result = new int();
                 CheckFormatOfInput(rawInput);
                 rawInput = NormaliseRawInput(rawInput);
-                var nestedStringsTree = _tree.GenerateTree(rawInput);
                 Console.WriteLine("Результат = " + result + " \ndebug: " +rawInput);
                 ShowErrorText();
             }
         }
 
-        private object GenerateNestedTree(string rawInput)
-        {
-            NestedStringElement nestedTree = new NestedStringElement();
-            // строение узла: строка, уровень вложенности, лист экземпляров этого же типа
-            
-
-            nestedTree = _tree.GenerateTree(rawInput);
-            
-            return new List<NestedStringElement>();
-        }
+ 
 
         
         private void CheckFormatOfInput(string rawInput)
