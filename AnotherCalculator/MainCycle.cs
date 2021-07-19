@@ -18,14 +18,15 @@ namespace AnotherCalculator
             {
                 Console.WriteLine("Введите новое выражение, введите \"q\" для завершения:");
                 //var rawInput = Console.ReadLine();
-                var rawInput = "1+2((12+13)123+143+(22+34))+(1+2(3+4))";
+                //var rawInput = "1+2((12+13)123+143+(22+34))+(1+2(3+4))";
+                var rawInput = "1+2(123+143+(22+34))+(1+2(3+4))";
                 Console.WriteLine(rawInput);
                 CatchQuitSymbol(rawInput);
                 int result = new int();
                 CheckFormatOfInput(rawInput);
                 rawInput = NormaliseRawInput(rawInput);
                 var stringNoParenthesis = _tree.TransformString(rawInput);
-                Console.WriteLine("Результат = " + result + " \ndebug: " +rawInput);
+                Console.WriteLine("Результат = " + result + " \ndebug: " + stringNoParenthesis);
                 ShowErrorText();
             }
         }
